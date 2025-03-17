@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopX - EPOS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Honk&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="sunset.png" />
+
+    <!-- Scripts & Styles -->
+    <script type="module" src="./src/js/app.js"></script>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="bg-gray-100 min-h-screen flex flex-col items-center p-6">
+    <!-- Header -->
+    <header class="w-full max-w-5xl text-center mb-6">
+      <h1
+        class="text-6xl font-extrabold text-gray-800"
+        style="font-family: 'Honk'"
+      >
+        🛍️ ShopX
+      </h1>
+      <p class="text-gray-600 mt-2">
+        Browse, add to cart, and checkout in one seamless experience.
+      </p>
+    </header>
+    <!-- Main Container -->
+    <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Product Listing Section -->
+      <section
+        id="product-list"
+        class="bg-white p-6 rounded-lg shadow-md h-[500px] overflow-y-auto"
+      >
+        <h2
+          class="text-2xl font-semibold text-gray-700 mb-4"
+          style="font-family: 'Honk'"
+        >
+          Products
+        </h2>
+        <div
+          id="products-container"
+          class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+        ></div>
+      </section>
+
+      <!-- Cart & Checkout Section -->
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <!-- Shopping Cart -->
+        <h2
+          class="text-2xl font-semibold text-gray-700 mb-4"
+          style="font-family: 'Honk'"
+        >
+          Shopping Cart
+        </h2>
+        <div id="cart-items" class="space-y-4"></div>
+
+        <!-- Total Price -->
+        <div class="flex justify-between items-center mt-4 p-2 border-t">
+          <h3 class="text-lg font-medium text-gray-700">
+            Total:
+            <span id="total-price" class="font-bold text-gray-900">฿0.00</span>
+          </h3>
+          <button
+            id="clear-cart"
+            class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
+          >
+            Clear Cart 🗑️
+          </button>
+        </div>
+
+        <!-- Checkout Form -->
+        <h2
+          class="text-2xl font-semibold text-gray-700 mt-6"
+          style="font-family: 'Honk'"
+        >
+          Checkout
+        </h2>
+        <form id="checkout-form" class="mt-4 space-y-3">
+          <input
+            type="text"
+            id="name"
+            placeholder="Full Name"
+            class="w-full p-2 border rounded"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email Address"
+            class="w-full p-2 border rounded"
+            required
+          />
+          <input
+            type="text"
+            id="address"
+            placeholder="Shipping Address"
+            class="w-full p-2 border rounded"
+            required
+          />
+          <button
+            type="submit"
+            class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+          >
+            Place Order ✅
+          </button>
+        </form>
+      </section>
+    </div>
+    <!-- Footer -->
+    <footer
+      class="flex justify-center items-center gap-x-2 w-full max-w-5xl text-center mt-10 p-4 text-gray-600 text-3xl border-t"
+      style="font-family: 'Honk'"
+    >
+      <p>Built with ❤️ using</p>
+      <img
+        src="src/assets/javascript.svg"
+        alt="JavaScript Logo"
+        class="w-10 h-10"
+      />
+    </footer>
+    <script src="./src/js/app.js"></script>
+  </body>
+</html>
