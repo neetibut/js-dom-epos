@@ -2,7 +2,6 @@ export class Cart {
   constructor() {
     this.items = JSON.parse(localStorage.getItem("cart")) || [];
     this.cartContainer = document.getElementById("cart-items");
-    this.totalPriceElement = document.getElementById("total-price");
   }
 
   // Save cart state & re-render UI
@@ -65,9 +64,9 @@ export class Cart {
     // handle empty cart case
     if (this.items.length === 0) {
       this.cartContainer.innerHTML = `<p class="text-gray-500 text-center">Your cart is empty. 🛒</p>`;
-      this.totalPriceElement.textContent = "฿0.00";
       return;
     }
+
     // iterates over each product in the cart items array, creating an HTML structure for each item.
     this.items.forEach((product) => {
       // creates a new div element to represent the cart item and adds TailwindCSS classes
@@ -81,6 +80,7 @@ export class Cart {
         "bg-white",
         "shadow"
       );
+
       // generate inner HTML for Cart Item (product image, product name & price, quantity controls, remove button)
       cartItem.innerHTML = `
           <div class="flex items-center space-x-4">
@@ -109,16 +109,58 @@ export class Cart {
             Remove ❌
           </button>
         `;
+
       // adds the dynamically generated cart item div into the cartContainer
       this.cartContainer.appendChild(cartItem);
     });
-    // calculates total price using .reduce()
-    // -> loops through all cart items
-    // -> multiply price * quantity for each item
-    // -> sums up all values
-    // -> format price to 2 decimal places
-    this.totalPriceElement.textContent = `฿${this.items
+
+    // Total and clear cart button
+    const total = this.items
       .reduce((sum, p) => sum + p.price * p.quantity, 0)
-      .toFixed(2)}`;
+      .toFixed(2);
+    const totalDiv = document.createElement("div");
+    totalDiv.className = "flex justify-between items-center mt-4 p-2 border-t";
+    totalDiv.innerHTML = `
+    <h3 class="text-lg font-medium text-gray-700">
+      Total:
+      <span class="font-bold text-gray-900">฿${total}</span>
+    </h3>
+    <button
+      id="clear-cart"
+      class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
+    >
+      Clear Cart 🗑️
+    </button>
+  `;
+    this.cartContainer.appendChild(totalDiv);
+
+    // Checkout form
+    const checkoutDiv = document.createElement("div");
+    checkoutDiv.innerHTML = `
+    <h2 class="text-2xl font-semibold text-gray-700 mt-6" style="font-family: 'Honk'">Checkout</h2>
+    <form id="checkout-form" class="mt-4 space-y-3">
+      <input type="text" id="name" placeholder="Full Name" class="w-full p-2 border rounded" required />
+      <input type="email" id="email" placeholder="Email Address" class="w-full p-2 border rounded" required />
+      <input type="text" id="address" placeholder="Shipping Address" class="w-full p-2 border rounded" required />
+      <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+        Place Order ✅
+      </button>
+    </form>
+  `;
+    this.cartContainer.appendChild(checkoutDiv);
+
+    // Attach clear cart event
+    const clearBtn = document.getElementById("clear-cart");
+    if (clearBtn) {
+      clearBtn.onclick = () => {
+        if (this.items.length === 0) {
+          alert("Your cart is already empty.");
+          return;
+        }
+        if (confirm("Are you sure you want to clear the cart?")) {
+          this.clear();
+        }
+      };
+    }
   }
 }

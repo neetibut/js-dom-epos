@@ -49,3 +49,9 @@ This educational project **does not yet include a backend server or database con
 | Deployment       | Vercel (via Vite build)                     |
 
 ---
+
+Next Features:
+
+- Connect MongoDB for persistent storage of orders.
+- Data visualization in frontend of data from database.
+- Login/Signup with Google OAuth.

@@ -1,3 +1,5 @@
+import { displayCart } from "../views/EPOS";
+
 export class Checkout {
   constructor(cart) {
     this.cart = cart;
@@ -28,6 +30,7 @@ export class Checkout {
 
     // Clear cart and reset form fields
     this.cart.clear();
+    displayCart();
     nameInput.value = "";
     emailInput.value = "";
     addressInput.value = "";
